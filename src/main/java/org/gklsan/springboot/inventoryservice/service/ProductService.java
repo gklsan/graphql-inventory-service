@@ -21,4 +21,33 @@ public class ProductService {
     return productRepository.findByCategory(category);
   }
 
+  public Product createProduct(String name, String category, double price, int stock) {
+    Product product = new Product(name, category, price, stock);
+
+    return productRepository.save(product);
+  }
+
+  public Product updateProduct(Long id, String name, String category, double price, int stock) {
+    Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+    product.setName(name);
+    product.setCategory(category);
+    product.setPrice(price);
+    product.setStock(stock);
+    productRepository.save(product);
+
+    return product;
+  }
+
+  public Product deleteProduct(Long id) {
+    Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+    productRepository.delete(product);
+    return product;
+  }
+
+  public Product updateStock(Long id, int stock) {
+    Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+    product.setStock(product.getStock() + stock);
+    productRepository.save(product);
+    return product;
+  }
 }

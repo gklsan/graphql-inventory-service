@@ -23,7 +23,6 @@ public class Product {
   private int stock;
 
   public Product(String name, String category, double price, int stock) {
-    this.id = id;
     this.name = name;
     this.category = category;
     this.price = price;
